@@ -69,6 +69,8 @@ import java.util.List;
 import java.util.Map;
 import java.util.UUID;
 
+import static com.hyphenate.chat.EMOptions.EM_CRYPTO_ALGORITHM.EM_CRYPTO_AES;
+
 public class DemoHelper {
     /**
      * data sync listener
@@ -251,7 +253,7 @@ public class DemoHelper {
         //options.setImPort(6717);
         //// 设置私有化 rest 地址，这里如果有端口直接跟在地址后: xxxx.com:port
         //options.setRestServer("a1.ssy.zhtchina.cn:8080");
-        options.setAppKey("easemob-demo#coco");
+//        options.setAppKey("easemob-demo#coco");
 
         // set if accept the invitation automatically
         options.setAcceptInvitationAlways(false);
@@ -259,6 +261,8 @@ public class DemoHelper {
         options.setRequireAck(true);
         // set if you need delivery ack
         options.setRequireDeliveryAck(false);
+        //设置消息加密
+        options.setCryptoAlgorithm(EM_CRYPTO_AES);
 
         //you need apply & set your own id if you want to use google cloud messaging.
         options.setGCMNumber("324169311137");
@@ -280,6 +284,17 @@ public class DemoHelper {
         if (demoModel.isCustomAppkeyEnabled() && demoModel.getCutomAppkey() != null && !demoModel.getCutomAppkey().isEmpty()) {
             options.setAppKey(demoModel.getCutomAppkey());
         }
+
+        if (demoModel.isCustomDnsUrlEnabled() && demoModel.getCutomDnsUrl() != null && !demoModel.getCutomDnsUrl().isEmpty()) {
+            options.setDnsUrl(demoModel.getCutomDnsUrl());
+            Log.d("set dns url - ", demoModel.getCutomDnsUrl());
+        }
+
+//        if(demoModel.isCustomDnsIpEnabled() && demoModel.getCutomDnsIp() != null && !demoModel.getCutomDnsIp().isEmpty()){
+//            options.setDnsIp(demoModel.getCutomDnsIp());
+//            Log.d("set dns ip - ", demoModel.getCutomDnsIp());
+//
+//        }
 
         options.allowChatroomOwnerLeave(getModel().isChatroomOwnerLeaveAllowed());
         options.setDeleteMessagesAsExitGroup(getModel().isDeleteMessagesAsExitGroup());
